@@ -10,17 +10,38 @@
 - Add the folder path to your system's `PATH` environment variable. This allows you to run Caddy commands from any location in the Command Prompt.
 
 ### 3. Configuring Caddy:
-- Inside the `F:\caddy` folder, create a file named `Caddyfile`. This will be Caddy's configuration file.
+- Inside the `F:\caddy` (example) folder, create a file named `Caddyfile`. This will be Caddy's configuration file.
+- There should be no specific extension
 - In the `Caddyfile`, add the following to set up a basic server:
-  ```
+
+   ```
   localhost
 
   reverse_proxy http://your_backend_server_address_here
   ```
+ ## Example of Caddy config file 
+  - In this example i have my static files in F:\caddy folder change your path accordingly
+  ```
+   {
+    local_certs
+  }
 
+  http://localhost:8081
+  {
+    root * F:\caddy  
+    file_server
+  }
+  https://localhost:4444
+  {
+    root * F:\caddy  
+    file_server
+    tls internal
+  }
+  ```
 ### 4. Checking for Port Conflicts:
 - Before running Caddy, ensure that port 80 and 443 are free. You can check this by using:
-  ```
+
+   ```
   netstat -aon | findstr ":80"
   netstat -aon | findstr ":443"
   ```
